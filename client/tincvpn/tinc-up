@@ -1,0 +1,8 @@
+#!/bin/sh
+TINC_OLD_GW=$(ip route list 0/0 | awk '{ print $3 }')
+echo -n $TINC_OLD_GW > /tmp/tinc_old_gw_$NETNAME
+
+dhcpcd $INTERFACE
+ip r add $REMOTEADDRESS/32 via $TINC_OLD_GW
+ip r del default
+ip r add default via 172.24.0.1 

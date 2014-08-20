@@ -1,0 +1,8 @@
+#!/bin/sh
+TINC_OLD_GW=$(route get default | sed -En 's/^.*gateway: ([0-9.]*)$/\1/p')
+echo -n $TINC_OLD_GW > /tmp/tinc_old_gw_$NETNAME
+
+ipconfig set $INTERFACE DHCP
+route add -host $REMOTEADDRESS $TINC_OLD_GW
+route delete default
+route add -net default 172.24.0.1 

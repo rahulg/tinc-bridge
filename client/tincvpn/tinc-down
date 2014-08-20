@@ -1,0 +1,6 @@
+#!/bin/sh
+TINC_OLD_GW=$(cat /tmp/tinc_old_gw_$NETNAME)
+
+ip r del default
+ip r add default via $TINC_OLD_GW
+ip r del $REMOTEADDRESS/32 via $TINC_OLD_GW

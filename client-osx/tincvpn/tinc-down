@@ -1,0 +1,6 @@
+#!/bin/sh
+TINC_OLD_GW=$(cat /tmp/tinc_old_gw_$NETNAME)
+
+route del default
+route add -net default $TINC_OLD_GW
+route del -host $REMOTEADDRESS $TINC_OLD_GW
